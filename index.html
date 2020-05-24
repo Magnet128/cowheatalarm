@@ -1,0 +1,154 @@
+﻿<!doctype html>
+<html>
+  <head>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-messaging.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+         https://firebase.google.com/docs/web/setup#available-libraries -->
+
+
+    <title>Hello web - index</title>
+    <meta charset="UTF-8"/>
+  <style>
+  body {
+    background-color: #aad9ea;
+  }
+    h1 {
+       font-size: 100px;
+    }
+    #area {
+       font-size: 50px;
+    }
+    input {
+       font-size: 50px;
+       pading: 20px 20px;
+       margin: 30px;
+       height: 70px;
+    }
+    .btn_login{
+       font-size: 50px;
+       margin: 40px;
+       width: 250px;
+       height: 80px;
+
+    }
+    #keepLogin {
+      margin-top: 80px;
+    }
+    .txt_lab {
+      margin-top: 80px;
+    }
+    .inp_radio {
+       width: 60px;
+       height: 60px;
+    }
+    .box_login {
+      margin-top: 40px;
+      padding-top: 30px;
+      border : 1px solid black;
+    }
+
+  </style>
+  <script type="text/javascript">
+
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyDa3HeGmJKz6rHUYYL41GAH4e74KWRi4-U",
+    authDomain: "cms-alarm.firebaseapp.com",
+    databaseURL: "https://cms-alarm.firebaseio.com",
+    projectId: "cms-alarm",
+    storageBucket: "cms-alarm.appspot.com",
+    messagingSenderId: "976556625928",
+    appId: "1:976556625928:web:a3df6e1e9839699cdcc1bd"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+
+  const messaging = firebase.messaging();
+
+  //token값 알아내기
+  messaging.requestPermission()
+      .then(function(){
+          console.log("Have permission");
+          return messaging.getToken();
+      })
+      .then(function(token){
+          console.log(token);
+      })
+      .catch(function(arr){
+          console.log("Error Occured");
+      });
+
+  window.onload = function()
+  {
+    // localStorage.clear();
+    // localStorage.removeItem("phone");
+    var yourName = localStorage.getItem('name');
+    if (yourName != null) {
+      document.getElementById("loginId").value = yourName;
+      document.getElementById("loginPw").value = localStorage.getItem("phone");
+      //alert(yourName);
+      //alert(localStorage.getItem("phone"));
+      document.hiddenform.submit();
+    }
+    else {
+      //alert("불러오기 실패");
+    }
+  }
+
+  </script>
+  </head>
+
+  <body>
+
+<center>
+    <h1>승가 알림이 web</a></h1>
+
+ <div id="area">
+ <form name="hiddenform" method="post" action="login.php">
+
+    <fieldset>
+      <legend class="screen_out">로그인 정보</legend>
+      <div class="box_login">
+        <div id="input">
+          <label for="loginId" class="screen_out">아이디(성함) </label>
+          <input type="text" id="loginId" name="loginId" placeholder="ID" >
+        </div>
+        <div class="input">
+          <label for="loginPw" class="screen_out">비밀번호(전화번호) </label>
+          <input type="password" id="loginPw" name="password" placeholder="Password" >
+        </div>
+      </div>
+      <button type="submit" class="btn_login" id="btn">로그인</button>
+      <input type="checkbox" id="keepLogin" class="inp_radio"  name="keepLogin" value="true">
+      <span class="txt_lab">로그인 상태 유지</span>
+  </label>
+    </fieldset>
+  </form>
+</center>
+</div>
+
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyDa3HeGmJKz6rHUYYL41GAH4e74KWRi4-U",
+    authDomain: "cms-alarm.firebaseapp.com",
+    databaseURL: "https://cms-alarm.firebaseio.com",
+    projectId: "cms-alarm",
+    storageBucket: "cms-alarm.appspot.com",
+    messagingSenderId: "976556625928",
+    appId: "1:976556625928:web:a3df6e1e9839699cdcc1bd"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+</script>
+  </body>
+</html>

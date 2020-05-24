@@ -1,0 +1,62 @@
+﻿<!doctype html>
+<html>
+  <head>
+    <title>Hello web - index</title>
+    <meta charset="UTF-8"/>
+
+    <style>
+       #container {
+          justify-content: center;
+          align-items: center;
+       }
+       #item {
+          border: 1px solid #000000;
+          width:50%;
+          height:70px;
+          font-size: 20px;
+          text-align: left;
+float: center;
+          position: relative;
+
+       }
+    </style>
+  </head>
+
+  <body>
+
+
+
+<div id="container">
+<center>
+    <h1>승가 알림이 web</a></h1>
+
+
+
+    <img src =<?php
+    $dbconnect = mysqli_connect("175.126.232.180","root","0415554970");
+    // mysql_connect()를 이용하여 DB에 연결. 성공한다면 1.
+
+    if(!$dbconnect){ //실패시 종료
+    die("0<br>".mysqli_error());
+    }
+
+    $flag = mysqli_select_db($dbconnect,"inofarm");
+    $query = "SELECT imgpath FROM imgpathtable order by idx desc limit 1;";
+    mysqli_query($dbconnect, "SET NAMES utf8"); //한글 출력을 위한 캐릭터셋팅.
+    $result = mysqli_query($dbconnect, $query) or die (mysqli_error($dbconnect));  //질의.
+
+    $row = mysqli_fetch_array($result);
+
+    echo $row[0];
+
+    ?> alt="cow"/>
+
+    <br>
+    <br>
+
+       <div id = "item">아이디(성함)</div>
+       <div id = "item">비밀번호(전화번호)</div>
+    </div>
+   </center>
+  </body>
+</html>

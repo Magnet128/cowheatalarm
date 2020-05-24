@@ -1,0 +1,189 @@
+﻿<!doctype html>
+<html>
+  <head>
+    <title>승가 알림이 web</title>
+    <meta charset="UTF-8"/>
+
+    <style>
+    body {
+      background-color: #aad9ea;
+    }
+    h1 {
+      font-size: 80px;
+
+    }
+    form {
+      margin: 0px auto;
+      vertical-align: bottom;
+
+    }
+    img {
+      border : 5px solid black;
+    }
+       #container {
+          justify-content: center;
+          align-items: center;
+
+          padding: 50px;
+       }
+       #item {
+          border: 1px solid #000000;
+          width:70%;
+          height:60px;
+          font-size: 40px;
+          text-align: left;
+          float: center;
+          margin: 10px;
+          background-color: white;
+          padding: 20px;
+       }
+       #item2 button{
+
+         margin : 10px;
+         margin-top: 40px;
+         width: 360px;
+         height: 100px;
+         font-size: 50px;
+         vertical-align: bottom;
+       }
+       #logoutbtn button{
+         width: 250px;
+         height: 80px;
+         font-size: 35px;
+         float: right;
+         margin-left: auto;
+       }
+    </style>
+
+    <script>
+      function onlogoutclick() {
+        var a =confirm("로그아웃 하시겠습니까?");
+        if (a) {
+                sessionStorage.clear();
+                localStorage.clear();
+                location.replace('logout.php');
+            }
+        else{
+          alert("취소");
+        }
+      }
+    </script>
+
+  </head>
+
+
+<body>
+  <div id="logoutbtn">
+    <button type="submit" name="logout"  onclick="onlogoutclick()">로그아웃</button>
+  </div>
+<div id="container">
+<center>
+
+    <h1>승가 알림이 web</a></h1>
+
+    <img src=<?php
+    session_start();
+    $name = $_SESSION['name'];
+    $phone = $_SESSION['phone'];
+    $dbconnect = mysqli_connect("175.126.232.180","root","0415554970");
+
+    if(!$dbconnect){
+    die("0<br>".mysqli_error());
+    }
+
+    $flag = mysqli_select_db($dbconnect,"inofarm");
+    $query = "SELECT imgpath, datetime FROM imgpathtable where username = '$name' and phone = '$phone' order by idx desc limit 1;";
+    mysqli_query($dbconnect, "SET NAMES utf8"); //한글 출력을 위한 캐릭터셋팅.
+    $result = mysqli_query($dbconnect, $query) or die (mysqli_error($dbconnect));
+
+    $num = mysqli_num_rows($result);
+
+    if($num != 0)
+    {
+      $row = mysqli_fetch_array($result);
+
+      $_SESSION['datetime'] = $row[1];
+
+      echo $row[0];
+    }
+    else {
+      $_SESSION['datetime'] = "-";
+      echo "noalarm.png";
+    }
+
+    ?> alt="cow"/>
+
+    <br>
+    <br>
+
+       <div id = "item">날짜/시간: <?php
+         $name = $_SESSION['name'];
+         $phone = $_SESSION['phone'];
+         $dbconnect = mysqli_connect("175.126.232.180","root","0415554970");
+
+         if(!$dbconnect){
+         die("0<br>".mysqli_error());
+         }
+
+         $flag = mysqli_select_db($dbconnect,"inofarm");
+         $query = "SELECT datetime FROM imgpathtable where username = '$name' and phone = '$phone' order by idx desc limit 1;";
+         mysqli_query($dbconnect, "SET NAMES utf8"); //한글 출력을 위한 캐릭터셋팅.
+         $result = mysqli_query($dbconnect, $query) or die (mysqli_error($dbconnect));
+
+         $num = mysqli_num_rows($result);
+
+         if($num != 0)
+         {
+           $row = mysqli_fetch_array($result);
+
+
+
+           echo $row[0];
+         }
+         else {
+
+           $_SESSION['datetime'] = "-";
+           echo "-";
+         }
+
+         ?>
+        </div>
+       <div id = "item">카메라 번호: <?php
+         $name = $_SESSION['name'];
+         $phone = $_SESSION['phone'];
+         $dbconnect = mysqli_connect("175.126.232.180","root","0415554970");
+
+         if(!$dbconnect){
+         die("0<br>".mysqli_error());
+         }
+
+         $flag = mysqli_select_db($dbconnect,"inofarm");
+         $query = "SELECT camnum FROM imgpathtable where username = '$name' and phone = '$phone' order by idx desc limit 1;";
+         mysqli_query($dbconnect, "SET NAMES utf8"); //한글 출력을 위한 캐릭터셋팅.
+         $result = mysqli_query($dbconnect, $query) or die (mysqli_error($dbconnect));
+
+         if($num != 0)
+         {
+           $row = mysqli_fetch_array($result);
+           echo $row[0];
+         }
+         else {
+           echo "-";
+         }
+         ?>
+       </div>
+
+       <div id = "item2">
+
+           <button type="submit" name="error" onclick="location.href='error.php'">오탐신고</button>
+
+
+           <button type="submit" name="check" onclick="location.href='check.php'">승가확인</button>
+
+       </div>
+    </div>
+   </center>
+  </body>
+
+
+</html>
