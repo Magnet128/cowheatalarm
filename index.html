@@ -9,7 +9,7 @@
          https://firebase.google.com/docs/web/setup#available-libraries -->
 
 
-    <title>Hello web - index</title>
+    <title>승가알림이</title>
     <meta charset="UTF-8"/>
   <style>
   body {
@@ -72,6 +72,7 @@
   messaging.requestPermission()
       .then(function(){
           console.log("Have permission");
+          localStorage.setItem('devicekey', messaging.getToken());
           return messaging.getToken();
       })
       .then(function(token){
@@ -130,25 +131,5 @@
 </center>
 </div>
 
-<!-- The core Firebase JS SDK is always required and must be listed first -->
-<script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-app.js"></script>
-
-<!-- TODO: Add SDKs for Firebase products that you want to use
-     https://firebase.google.com/docs/web/setup#available-libraries -->
-
-<script>
-  // Your web app's Firebase configuration
-  var firebaseConfig = {
-    apiKey: "AIzaSyDa3HeGmJKz6rHUYYL41GAH4e74KWRi4-U",
-    authDomain: "cms-alarm.firebaseapp.com",
-    databaseURL: "https://cms-alarm.firebaseio.com",
-    projectId: "cms-alarm",
-    storageBucket: "cms-alarm.appspot.com",
-    messagingSenderId: "976556625928",
-    appId: "1:976556625928:web:a3df6e1e9839699cdcc1bd"
-  };
-  // Initialize Firebase
-  firebase.initializeApp(firebaseConfig);
-</script>
   </body>
 </html>
