@@ -74,6 +74,7 @@
       .then(function(){
           console.log("Have permission");
           localStorage.setItem('devicekey', messaging.getToken());
+          console.log(localStorage.getItem("devicekey"));
           // devicetoken = messaging.getToken();
         // $.ajax({
         //   url				: 'http://175.126.232.180:8080/login.php',
@@ -120,6 +121,7 @@
 
   function getToken()
   {
+
     document.getElementById("devicekey").value = localStorage.getItem("devicekey");
   }
 
