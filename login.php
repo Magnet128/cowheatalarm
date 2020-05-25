@@ -44,15 +44,14 @@ if(!$flag) die("0<br>".mysqli_error());
 $name = $_POST['loginId'];
 $phone = $_POST['password'];
 
-$devicekeys = "<script language=javascript> localStorage.getItem("devicekey");</script>";
+$devicekeys = $_POST['devicekey'];
 
-$query = "delete from `cma` where `name` = \"$name\" and `devicekey`= '$devicekeys';";
+$query = "delete from `db_cow`.`cma` where `name` = \"$name\";";
 
 $result = mysqli_query($dbconnect, $query);
-
 if(!$result) die("[SQL error]".mysqli_error($dbconnect)); //질의 실패시 종료
 
-$query = "INSERT INTO `cma` VALUES('$name','$phone','$devicekeys', 1, 1);";
+$query = "INSERT INTO `db_cow`.`cma` VALUES('$name','$phone','$devicekeys', 1, 1);";
 
 $result = mysqli_query($dbconnect, $query); //질의.
 if(!$result) die("[SQL error]".mysqli_error($dbconnect)); //질의 실패시 종료

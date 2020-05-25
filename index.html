@@ -4,7 +4,7 @@
     <!-- The core Firebase JS SDK is always required and must be listed first -->
     <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-messaging.js"></script>
-
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <!-- TODO: Add SDKs for Firebase products that you want to use
          https://firebase.google.com/docs/web/setup#available-libraries -->
 
@@ -73,6 +73,23 @@
       .then(function(){
           console.log("Have permission");
           localStorage.setItem('devicekey', messaging.getToken());
+
+        $.ajax({
+          url				: 'http://175.126.232.180:8080/login.php',
+          data			: {
+            devicekey		: messaging.getToken()
+          },
+          type			: 'POST',
+          dataType		: 'json',
+          success		: function(result) {
+            if(result.success == false) {
+              alert(result.msg);
+              return;
+            }
+            alert(result.data);
+          }
+        });
+
           return messaging.getToken();
       })
       .then(function(token){
