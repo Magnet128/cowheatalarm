@@ -53,6 +53,7 @@
   </style>
   <script type="text/javascript">
 
+  var devicetoken = "";
   // Your web app's Firebase configuration
   var firebaseConfig = {
     apiKey: "AIzaSyDa3HeGmJKz6rHUYYL41GAH4e74KWRi4-U",
@@ -73,22 +74,22 @@
       .then(function(){
           console.log("Have permission");
           localStorage.setItem('devicekey', messaging.getToken());
-
-        $.ajax({
-          url				: 'http://175.126.232.180:8080/login.php',
-          data			: {
-            devicekey		: messaging.getToken()
-          },
-          type			: 'POST',
-          dataType		: 'json',
-          success		: function(result) {
-            if(result.success == false) {
-              alert(result.msg);
-              return;
-            }
-            alert(result.data);
-          }
-        });
+          devicetoken = messaging.getToken();
+        // $.ajax({
+        //   url				: 'http://175.126.232.180:8080/login.php',
+        //   data			: {
+        //     devicekey		: messaging.getToken()
+        //   },
+        //   type			: 'POST',
+        //   dataType		: 'json',
+        //   success		: function(result) {
+        //     if(result.success == false) {
+        //       alert(result.msg);
+        //       return;
+        //     }
+        //     //alert(result.data);
+        //   }
+        // });
 
           return messaging.getToken();
       })
@@ -114,6 +115,11 @@
     else {
       //alert("불러오기 실패");
     }
+  }
+
+  function getToken()
+  {
+    return devicetoken;
   }
 
   </script>
@@ -142,6 +148,7 @@
       <button type="submit" class="btn_login" id="btn">로그인</button>
       <input type="checkbox" id="keepLogin" class="inp_radio"  name="keepLogin" value="true">
       <span class="txt_lab">로그인 상태 유지</span>
+      <input type="hidden" id="devicekey" name="devicekey" value="getToken()">
   </label>
     </fieldset>
   </form>
