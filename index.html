@@ -108,7 +108,7 @@
     var yourName = localStorage.getItem('name');
     if (yourName != null) {
       document.getElementById("loginId").value = yourName;
-      document.getElementById("loginPw").value = localStorage.getItem("devicekey");
+      document.getElementById("loginPw").value = localStorage.getItem("phone");
       //alert(yourName);
       //alert(localStorage.getItem("phone"));
       document.hiddenform.submit();
@@ -120,7 +120,7 @@
 
   function getToken()
   {
-    document.getElementById("devicekey").value = localStorage.getItem("phone");
+    document.getElementById("devicekey").value = localStorage.getItem("devicekey");
   }
 
   </script>
