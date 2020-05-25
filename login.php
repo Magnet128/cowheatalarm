@@ -22,7 +22,7 @@
     //alert(name);
     //alert(phone);
 
-    location.replace('main.html');
+    location.replace('http://175.126.232.180:8080/main.html');
   }
 
 </script>
@@ -69,7 +69,7 @@ if($noOfRows == 0)
 {
   echo "none";
   echo "<script>alert(\"로그인 정보가 올바르지 않습니다.\");</script>";
-  echo("<script>location.replace('index.html');</script>");
+  echo("<script>location.replace('https://cowheatalarm.netlify.app');</script>");
 }
 else
 {
